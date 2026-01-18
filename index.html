@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TPM Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #fafafa;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: #0f172a;
+            color: #fff;
+            padding: 80px 40px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .hero .role {
+            font-size: 1.1rem;
+            color: #94a3b8;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero .value-prop {
+            font-size: 1.4rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: #e2e8f0;
+            font-weight: 400;
+        }
+
+        .hero .contact {
+            margin-top: 32px;
+        }
+
+        .hero .contact a {
+            color: #60a5fa;
+            text-decoration: none;
+            margin: 0 12px;
+            font-size: 0.95rem;
+        }
+
+        .hero .contact a:hover {
+            text-decoration: underline;
+        }
+
+        /* Case Study Tiles */
+        .tiles-section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        .tiles-section h2 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #64748b;
+            margin-bottom: 32px;
+        }
+
+        .tiles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .tile {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 28px;
+            text-decoration: none;
+            color: inherit;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+
+        .tile:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+
+        .tile .tag {
+            display: inline-block;
+            background: #f1f5f9;
+            color: #475569;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tile h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: #0f172a;
+        }
+
+        .tile p {
+            font-size: 0.95rem;
+            color: #64748b;
+            margin-bottom: 16px;
+        }
+
+        .tile .outcome {
+            font-size: 0.85rem;
+            color: #059669;
+            font-weight: 600;
+        }
+
+        /* Case Study Detail */
+        .case-study {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .case-study:last-child {
+            border-bottom: none;
+        }
+
+        .case-study-header {
+            margin-bottom: 40px;
+        }
+
+        .case-study-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .case-study-header .company {
+            color: #64748b;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            font-size: 0.9rem;
+            color: #475569;
+        }
+
+        .meta-item {
+            display: flex;
+            gap: 8px;
+        }
+
+        .meta-label {
+            color: #94a3b8;
+        }
+
+        .section {
+            margin-bottom: 36px;
+        }
+
+        .section h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #64748b;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .section p {
+            color: #334155;
+            margin-bottom: 12px;
+        }
+
+        .section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .section li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            color: #334155;
+        }
+
+        .section li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #94a3b8;
+        }
+
+        .outcomes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .outcome-card {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 6px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .outcome-card .number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #059669;
+        }
+
+        .outcome-card .label {
+            font-size: 0.8rem;
+            color: #475569;
+            margin-top: 4px;
+        }
+
+        /* Back to top */
+        .back-to-top {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .back-to-top a {
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .back-to-top a:hover {
+            color: #0f172a;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 600px) {
+            .hero {
+                padding: 60px 24px;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero .value-prop {
+                font-size: 1.2rem;
+            }
+            .meta {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>[Your Name]</h1>
+        <p class="role">Technical Program Manager – AI & Platforms</p>
+        <p class="value-prop">I ship complex AI and data systems by turning chaos into executable plans.</p>
+        <div class="contact">
+            <a href="mailto:you@email.com">Email</a>
+            <a href="https://linkedin.com/in/yourprofile">LinkedIn</a>
+            <a href="https://github.com/yourusername">GitHub</a>
+        </div>
+    </section>
+
+    <!-- Case Study Tiles -->
+    <section class="tiles-section">
+        <h2>Selected Work</h2>
+        <div class="tiles">
+            <a href="#case-study-1" class="tile">
+                <span class="tag">ML Platform</span>
+                <h3>Real-Time Race Strategy Engine</h3>
+                <p>Built ML pipeline for pit stop predictions during live NASCAR events.</p>
+                <span class="outcome">↓ 40% faster decisions</span>
+            </a>
+            <a href="#case-study-2" class="tile">
+                <span class="tag">Data Infrastructure</span>
+                <h3>Enterprise Data Lake Migration</h3>
+                <p>Led cross-team migration from legacy warehouse to modern lakehouse architecture.</p>
+                <span class="outcome">$2M annual savings</span>
+            </a>
+            <a href="#case-study-3" class="tile">
+                <span class="tag">AI Product</span>
+                <h3>LLM-Powered Support System</h3>
+                <p>Shipped internal AI assistant handling 10K+ monthly queries.</p>
+                <span class="outcome">70% ticket deflection</span>
+            </a>
+            <a href="#case-study-4" class="tile">
+                <span class="tag">Platform</span>
+                <h3>API Gateway Consolidation</h3>
+                <p>Unified 12 microservices into single managed gateway with auth + rate limiting.</p>
+                <span class="outcome">99.9% uptime achieved</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Case Study 1 -->
+    <article class="case-study" id="case-study-1">
+        <div class="case-study-header">
+            <h2>Real-Time Race Strategy Engine</h2>
+            <p class="company">NASCAR Analytics Team — [Company Name]</p>
+            <div class="meta">
+                <div class="meta-item"><span class="meta-label">Role:</span> Technical Program Manager</div>
+                <div class="meta-item"><span class="meta-label">Team:</span> 4 engineers, 2 data scientists</div>
+                <div class="meta-item"><span class="meta-label">Timeline:</span> 6 months</div>
+                <div class="meta-item"><span class="meta-label">Stack:</span> Python, AWS, Kafka, TensorFlow</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>The Problem</h3>
+            <p>Race teams lacked real-time strategy predictions during yellow flag events, causing delayed pit decisions and lost track position. Manual analysis took 45+ seconds — an eternity in racing.</p>
+            <p><strong>Business risk:</strong> Poor pit timing = lost races = lost sponsorship value.</p>
+        </div>
+
+        <div class="section">
+            <h3>Why This Was Hard</h3>
+            <ul>
+                <li>Real-time telemetry and historical simulations had mismatched schemas</li>
+                <li>No reliable labeling for ML training data — "good pit decisions" were subjective</li>
+                <li>Stakeholders (crew chiefs) needed explainability, not just predictions</li>
+                <li>Sub-second latency requirements on race day with unreliable track connectivity</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>What I Did</h3>
+            <ul>
+                <li>Defined data contracts between telemetry, simulation, and ML teams</li>
+                <li>Built labeling framework with domain experts to create ground truth dataset</li>
+                <li>Drove architecture decision: edge inference with cloud fallback</li>
+                <li>Ran weekly stakeholder syncs translating model confidence into actionable UI</li>
+                <li>Managed vendor relationship for track-side connectivity backup</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>Outcomes</h3>
+            <div class="outcomes-grid">
+                <div class="outcome-card">
+                    <div class="number">40%</div>
+                    <div class="label">Faster decisions</div>
+                </div>
+                <div class="outcome-card">
+                    <div class="number">6</div>
+                    <div class="label">Races deployed</div>
+                </div>
+                <div class="outcome-card">
+                    <div class="number">92%</div>
+                    <div class="label">Crew chief adoption</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>What I Learned</h3>
+            <p>Explainability beats accuracy for user adoption. We had a better model that crews didn't trust. Simpler model + clear reasoning won.</p>
+        </div>
+    </article>
+
+    <!-- Case Study 2 -->
+    <article class="case-study" id="case-study-2">
+        <div class="case-study-header">
+            <h2>Enterprise Data Lake Migration</h2>
+            <p class="company">Data Platform Team — [Company Name]</p>
+            <div class="meta">
+                <div class="meta-item"><span class="meta-label">Role:</span> Technical Program Manager</div>
+                <div class="meta-item"><span class="meta-label">Team:</span> 8 engineers, 3 teams</div>
+                <div class="meta-item"><span class="meta-label">Timeline:</span> 9 months</div>
+                <div class="meta-item"><span class="meta-label">Stack:</span> Databricks, Snowflake, Airflow, dbt</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>The Problem</h3>
+            <p>Legacy data warehouse was hitting scale limits. Query times ballooned to 20+ minutes. Data teams were blocked, and leadership was about to approve a $3M hardware upgrade that wouldn't solve the real issue.</p>
+            <p><strong>Business risk:</strong> Analytics backlog growing 40% quarterly. Product decisions delayed by weeks.</p>
+        </div>
+
+        <div class="section">
+            <h3>Why This Was Hard</h3>
+            <ul>
+                <li>150+ downstream dashboards with undocumented dependencies</li>
+                <li>Three teams with competing priorities and no shared roadmap</li>
+                <li>Zero downtime tolerance — migration had to be invisible to users</li>
+                <li>Political: legacy system owner resistant to change</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>What I Did</h3>
+            <ul>
+                <li>Built dependency map using query logs — found 40% of dashboards were orphaned</li>
+                <li>Created migration scorecard tracking data quality, performance, and cost per table</li>
+                <li>Designed dual-write pattern for zero-downtime cutover</li>
+                <li>Ran weekly "migration war room" syncing all three teams</li>
+                <li>Negotiated with legacy owner: positioned as "modernization" not "replacement"</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>Outcomes</h3>
+            <div class="outcomes-grid">
+                <div class="outcome-card">
+                    <div class="number">$2M</div>
+                    <div class="label">Annual savings</div>
+                </div>
+                <div class="outcome-card">
+                    <div class="number">8x</div>
+                    <div class="label">Query speed</div>
+                </div>
+                <div class="outcome-card">
+                    <div class="number">0</div>
+                    <div class="label">Production incidents</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>What I Learned</h3>
+            <p>The technical migration was 30% of the work. The other 70% was dependency mapping, stakeholder alignment, and managing the politics of sunsetting someone's system.</p>
+        </div>
+    </article>
+
+    <!-- Case Study 3 -->
+    <article class="case-study" id="case-study-3">
+        <div class="case-study-header">
+            <h2>LLM-Powered Support System</h2>
+            <p class="company">Internal Tools Team — [Company Name]</p>
+            <div class="meta">
+                <div class="meta-item"><span class="meta-label">Role:</span> Technical Program Manager</div>
+                <div class="meta-item"><span class="meta-label">Team:</span> 3 engineers, 1 ML engineer</div>
+                <div class="meta-item"><span class="meta-label">Timeline:</span> 4 months</div>
+                <div class="meta-item"><span class="meta-label">Stack:</span> OpenAI API, RAG, Pinecone, React</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>The Problem</h3>
+            <p>Internal support team drowning in repetitive tickets. 60% of questions were answered in existing docs — but nobody could find them. Support response time: 4+ hours average.</p>
+            <p><strong>Business risk:</strong> Engineering productivity loss estimated at $500K/year from waiting on internal support.</p>
+        </div>
+
+        <div class="section">
+            <h3>Why This Was Hard</h3>
+            <ul>
+                <li>Documentation scattered across Confluence, Notion, Slack, and tribal knowledge</li>
+                <li>LLM hallucination risk high — wrong answers worse than no answers</li>
+                <li>Security review required for any tool touching internal data</li>
+                <li>Skeptical users burned by previous "AI" tools that didn't work</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>What I Did</h3>
+            <ul>
+                <li>Scoped MVP: 50 most common ticket types only — resist feature creep</li>
+                <li>Built confidence scoring: AI only answers when >85% confident, else routes to human</li>
+                <li>Drove security review — got approval by limiting data scope and adding audit logs</li>
+                <li>Ran 2-week beta with power users, iterated on prompt engineering</li>
+                <li>Created feedback loop: thumbs up/down on every answer feeds retraining</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>Outcomes</h3>
+            <div class="outcomes-grid">
+                <div class="outcome-card">
+                    <div class="number">70%</div>
+                    <div class="label">Ticket deflection</div>
+                </div>
+                <div class="outcome-card">
+                    <div class="number">10K+</div>
+                    <div class="label">Monthly queries</div>
+                </div>
+                <div class="outcome-card">
+                    <div class="number">4.2/5</div>
+                    <div class="label">User satisfaction</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>What I Learned</h3>
+            <p>The "I don't know" feature was the most important. Users trusted the system because it admitted uncertainty instead of confidently hallucinating.</p>
+        </div>
+    </article>
+
+    <!-- Case Study 4 -->
+    <article class="case-study" id="case-study-4">
+        <div class="case-study-header">
+            <h2>API Gateway Consolidation</h2>
+            <p class="company">Platform Engineering — [Company Name]</p>
+            <div class="meta">
+                <div class="meta-item"><span class="meta-label">Role:</span> Technical Program Manager</div>
+                <div class="meta-item"><span class="meta-label">Team:</span> 6 engineers across 4 teams</div>
+                <div class="meta-item"><span class="meta-label">Timeline:</span> 5 months</div>
+                <div class="meta-item"><span class="meta-label">Stack:</span> Kong, AWS API Gateway, Terraform</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>The Problem</h3>
+            <p>12 microservices, 12 different auth implementations, 12 different rate limiting approaches. Security audit flagged 3 critical vulnerabilities. Every new integration took 2+ weeks of custom work.</p>
+            <p><strong>Business risk:</strong> Security exposure + integration velocity killing partnerships.</p>
+        </div>
+
+        <div class="section">
+            <h3>Why This Was Hard</h3>
+            <ul>
+                <li>Each service owned by different team with different priorities</li>
+                <li>No one wanted to be "first" to migrate — risk without reward</li>
+                <li>Legacy auth tokens embedded in partner integrations</li>
+                <li>Zero budget for new headcount — had to do with existing teams</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>What I Did</h3>
+            <ul>
+                <li>Built business case: quantified security risk + integration delay costs for leadership</li>
+                <li>Designed "migration sprints" — each team gets 2 weeks of dedicated support</li>
+                <li>Created compatibility layer for legacy auth during transition period</li>
+                <li>Published migration playbook so teams could self-serve</li>
+                <li>Tracked adoption weekly — celebrated early adopters, applied pressure to laggards</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>Outcomes</h3>
+            <div class="outcomes-grid">
+                <div class="outcome-card">
+                    <div class="number">99.9%</div>
+                    <div class="label">Uptime achieved</div>
+                </div>
+                <div class="outcome-card">
+                    <div class="number">12→1</div>
+                    <div class="label">Auth systems</div>
+                </div>
+                <div class="outcome-card">
+                    <div class="number">2 days</div>
+                    <div class="label">New integration time</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>What I Learned</h3>
+            <p>Platform migrations are adoption problems, not technical problems. The compatibility layer bought us time. The migration sprints created accountability. The playbook scaled knowledge.</p>
+        </div>
+    </article>
+
+    <div class="back-to-top">
+        <a href="#">↑ Back to top</a>
+    </div>
+
+    <footer>
+        <p>Built to be scanned in 90 seconds. Details available on request.</p>
+    </footer>
+
+</body>
+</html>
