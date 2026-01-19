@@ -29,6 +29,9 @@ contextBridge.exposeInMainWorld('electronAPI', {
   // Calendar
   getCalendarEvents: (startDate: string, endDate: string) => ipcRenderer.invoke(IPCChannel.GET_CALENDAR_EVENTS, startDate, endDate),
 
+  // Analytics
+  getAnalytics: () => ipcRenderer.invoke(IPCChannel.GET_ANALYTICS),
+
   // System
   getTimezones: () => ipcRenderer.invoke(IPCChannel.GET_TIMEZONES),
 
@@ -62,6 +65,7 @@ declare global {
       stopRun: (runId: string) => Promise<IPCResponse>;
       getRunLogs: (runId: string) => Promise<IPCResponse>;
       getCalendarEvents: (startDate: string, endDate: string) => Promise<IPCResponse>;
+      getAnalytics: () => Promise<IPCResponse>;
       getTimezones: () => Promise<IPCResponse>;
       onRunStarted: (callback: (run: any) => void) => void;
       onRunCompleted: (callback: (run: any) => void) => void;

@@ -416,6 +416,84 @@ export class DatabaseService {
     };
   }
 
+  // Analytics methods
+  getRunStats(): any {
+    const stmt = this.db.prepare(`
+      SELECT
+        COUNT(*) as total,
+        SUM(CASE WHEN status = 'succeeded' THEN 1 ELSE 0 END) as succeeded,
+        SUM(CASE WHEN status = 'failed' THEN 1 ELSE 0 END) as failed,
+        SUM(CASE WHEN status = 'running' THEN 1 ELSE 0 END) as running,
+        SUM(CASE WHEN status = 'canceled' THEN 1 ELSE 0 END) as canceled,
+        SUM(CASE WHEN status = 'timed_out' THEN 1 ELSE 0 END) as timed_out
+      FROM runs
+    `);
+    return stmt.get();
+  }
+
+  getStatusBreakdown(): any[] {
+    const stats = this.getRunStats();
+    const total = stats.total || 1; // Avoid division by zero
+
+    return [
+      { status: 'succeeded', count: stats.succeeded, percentage: Math.round((stats.succeeded / total) * 100) },
+      { status: 'failed', count: stats.failed, percentage: Math.round((stats.failed / total) * 100) },
+      { status: 'running', count: stats.running, percentage: Math.round((stats.running / total) * 100) },
+      { status: 'canceled', count: stats.canceled, percentage: Math.round((stats.canceled / total) * 100) },
+      { status: 'timed_out', count: stats.timed_out, percentage: Math.round((stats.timed_out / total) * 100) },
+    ].filter(item => item.count > 0);
+  }
+
+  getDailyRunData(days: number = 30): any[] {
+    const stmt = this.db.prepare(`
+      SELECT
+        DATE(planned_start) as date,
+        COUNT(*) as total,
+        SUM(CASE WHEN status = 'succeeded' THEN 1 ELSE 0 END) as succeeded,
+        SUM(CASE WHEN status = 'failed' THEN 1 ELSE 0 END) as failed,
+        SUM(CASE WHEN status = 'timed_out' THEN 1 ELSE 0 END) as timed_out
+      FROM runs
+      WHERE planned_start >= date('now', '-${days} days')
+      GROUP BY DATE(planned_start)
+      ORDER BY date ASC
+    `);
+    return stmt.all();
+  }
+
+  getAgentPerformance(): any[] {
+    const stmt = this.db.prepare(`
+      SELECT
+        r.agent_id,
+        a.name as agent_name,
+        COUNT(*) as total_runs,
+        SUM(CASE WHEN r.status = 'succeeded' THEN 1 ELSE 0 END) as successful_runs,
+        SUM(CASE WHEN r.status = 'failed' THEN 1 ELSE 0 END) as failed_runs,
+        AVG(
+          CASE
+            WHEN r.actual_start IS NOT NULL AND r.actual_end IS NOT NULL
+            THEN (julianday(r.actual_end) - julianday(r.actual_start)) * 86400
+            ELSE NULL
+          END
+        ) as average_duration_seconds,
+        MAX(r.planned_start) as last_run
+      FROM runs r
+      JOIN agents a ON r.agent_id = a.id
+      GROUP BY r.agent_id, a.name
+      ORDER BY total_runs DESC
+    `);
+    return stmt.all();
+  }
+
+  getAnalytics(): any {
+    return {
+      overview: this.getRunStats(),
+      statusBreakdown: this.getStatusBreakdown(),
+      dailyRuns: this.getDailyRunData(30),
+      agentPerformance: this.getAgentPerformance(),
+      recentActivity: this.getAllRuns(10),
+    };
+  }
+
   close() {
     this.db.close();
   }

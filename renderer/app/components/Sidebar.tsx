@@ -2,7 +2,7 @@ import React from 'react';
 
 interface SidebarProps {
   currentView: string;
-  onViewChange: (view: 'calendar' | 'agents' | 'runs' | 'settings') => void;
+  onViewChange: (view: 'calendar' | 'agents' | 'runs' | 'charts' | 'settings') => void;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ currentView, onViewChange }) => {
@@ -10,6 +10,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, onViewChange }) => {
     { id: 'calendar', label: 'Calendar', icon: '📅' },
     { id: 'agents', label: 'Agents', icon: '🤖' },
     { id: 'runs', label: 'Runs', icon: '▶️' },
+    { id: 'charts', label: 'Analytics', icon: '📊' },
     { id: 'settings', label: 'Settings', icon: '⚙️' },
   ];
 

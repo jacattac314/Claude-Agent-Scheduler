@@ -288,6 +288,16 @@ function setupIPC() {
     }
   });
 
+  // Analytics handlers
+  ipcMain.handle(IPCChannel.GET_ANALYTICS, async (): Promise<IPCResponse> => {
+    try {
+      const analytics = db.getAnalytics();
+      return { success: true, data: analytics };
+    } catch (error: any) {
+      return { success: false, error: error.message };
+    }
+  });
+
   // System handlers
   ipcMain.handle(IPCChannel.GET_TIMEZONES, async (): Promise<IPCResponse> => {
     try {

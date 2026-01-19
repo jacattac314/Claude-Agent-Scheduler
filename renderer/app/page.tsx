@@ -5,9 +5,10 @@ import Sidebar from './components/Sidebar';
 import CalendarView from './components/CalendarView';
 import AgentsView from './components/AgentsView';
 import RunsView from './components/RunsView';
+import ChartsView from './components/ChartsView';
 import SettingsView from './components/SettingsView';
 
-type View = 'calendar' | 'agents' | 'runs' | 'settings';
+type View = 'calendar' | 'agents' | 'runs' | 'charts' | 'settings';
 
 export default function Home() {
   const [currentView, setCurrentView] = useState<View>('calendar');
@@ -20,6 +21,8 @@ export default function Home() {
         return <AgentsView />;
       case 'runs':
         return <RunsView />;
+      case 'charts':
+        return <ChartsView />;
       case 'settings':
         return <SettingsView />;
       default:

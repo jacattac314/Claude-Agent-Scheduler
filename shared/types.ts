@@ -115,6 +115,48 @@ export interface CalendarEvent {
   };
 }
 
+// Analytics types
+export interface RunStats {
+  total: number;
+  succeeded: number;
+  failed: number;
+  running: number;
+  canceled: number;
+  timed_out: number;
+}
+
+export interface AgentStats {
+  agent_id: string;
+  agent_name: string;
+  total_runs: number;
+  successful_runs: number;
+  failed_runs: number;
+  average_duration_seconds: number;
+  last_run?: string;
+}
+
+export interface DailyRunData {
+  date: string;
+  total: number;
+  succeeded: number;
+  failed: number;
+  timed_out: number;
+}
+
+export interface StatusBreakdown {
+  status: RunStatus;
+  count: number;
+  percentage: number;
+}
+
+export interface Analytics {
+  overview: RunStats;
+  statusBreakdown: StatusBreakdown[];
+  dailyRuns: DailyRunData[];
+  agentPerformance: AgentStats[];
+  recentActivity: Run[];
+}
+
 // IPC channels
 export enum IPCChannel {
   // Agents
@@ -142,6 +184,9 @@ export enum IPCChannel {
 
   // Calendar
   GET_CALENDAR_EVENTS = 'get-calendar-events',
+
+  // Analytics
+  GET_ANALYTICS = 'get-analytics',
 
   // System
   GET_TIMEZONES = 'get-timezones',
