@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Apple-style base styles */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  @apply bg-gray-50 text-gray-900;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400;
+}
+
+/* Focus styles */
+*:focus-visible {
+  @apply outline-none ring-2 ring-primary-500 ring-offset-2;
+}
+
+/* Selection */
+::selection {
+  @apply bg-primary-200 text-primary-900;
+}
+
+/* Draggable region for title bar */
+.drag-region {
+  -webkit-app-region: drag;
+}
+
+.no-drag {
+  -webkit-app-region: no-drag;
+}
+
+/* React Big Calendar custom styles */
+.rbc-calendar {
+  @apply font-sans;
+}
+
+.rbc-header {
+  @apply py-3 font-medium text-gray-600 text-sm border-b border-gray-200;
+}
+
+.rbc-today {
+  @apply bg-primary-50;
+}
+
+.rbc-off-range-bg {
+  @apply bg-gray-50;
+}
+
+.rbc-event {
+  @apply bg-primary-500 border-none rounded-md text-sm px-2 py-1;
+}
+
+.rbc-event.rbc-selected {
+  @apply bg-primary-600;
+}
+
+.rbc-event-content {
+  @apply text-white;
+}
+
+.rbc-day-bg + .rbc-day-bg {
+  @apply border-l border-gray-200;
+}
+
+.rbc-month-row + .rbc-month-row {
+  @apply border-t border-gray-200;
+}
+
+.rbc-time-slot {
+  @apply border-t border-gray-100;
+}
+
+.rbc-timeslot-group {
+  @apply border-b border-gray-200;
+}
+
+.rbc-time-header-content {
+  @apply border-l border-gray-200;
+}
+
+.rbc-time-content {
+  @apply border-t border-gray-200;
+}
+
+.rbc-toolbar {
+  @apply mb-4 flex flex-wrap gap-2;
+}
+
+.rbc-toolbar button {
+  @apply px-3 py-1.5 text-sm rounded-lg border border-gray-300 bg-white hover:bg-gray-50 transition-colors;
+}
+
+.rbc-toolbar button.rbc-active {
+  @apply bg-primary-500 text-white border-primary-500;
+}
+
+.rbc-toolbar-label {
+  @apply font-semibold text-lg text-gray-900;
+}
+
+/* Status pill colors */
+.status-queued {
+  @apply bg-gray-100 text-gray-700;
+}
+
+.status-running {
+  @apply bg-primary-100 text-primary-700;
+}
+
+.status-succeeded {
+  @apply bg-green-100 text-green-700;
+}
+
+.status-failed {
+  @apply bg-red-100 text-red-700;
+}
+
+.status-canceled {
+  @apply bg-yellow-100 text-yellow-700;
+}
+
+.status-timed_out {
+  @apply bg-orange-100 text-orange-700;
+}
+
+/* Animation utilities */
+.animate-in {
+  animation: animateIn 0.2s ease-out;
+}
+
+@keyframes animateIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
