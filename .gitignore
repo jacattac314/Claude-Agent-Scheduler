@@ -17,3 +17,15 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Vercel
+.vercel
+.vercel.json.local
+
+# Debug reports
+debug-reports/
