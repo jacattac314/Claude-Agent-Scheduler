@@ -1,36 +1,34 @@
 const { test, expect } = require('@playwright/test');
-const { injectAxe, checkA11y } = require('axe-playwright');
+const AxeBuilder = require('@axe-core/playwright').default;
 
 test.describe('Accessibility Tests', () => {
   test.beforeEach(async ({ page }) => {
     const htmlPath = 'file://' + process.cwd() + '/index.html';
     await page.goto(htmlPath);
-    await injectAxe(page);
   });
 
   test('should not have any automatically detectable accessibility issues', async ({ page }) => {
-    await checkA11y(page, null, {
-      detailedReport: true,
-      detailedReportOptions: {
-        html: true,
-      },
-    });
+    const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
+    expect(accessibilityScanResults.violations).toEqual([]);
   });
 
   test('should have proper color contrast', async ({ page }) => {
-    await checkA11y(page, null, {
-      rules: {
-        'color-contrast': { enabled: true },
-      },
-    });
+    const accessibilityScanResults = await new AxeBuilder({ page })
+      .withTags(['wcag2aa', 'wcag21aa'])
+      .analyze();
+
+    const contrastViolations = accessibilityScanResults.violations.filter(
+      v => v.id === 'color-contrast'
+    );
+    expect(contrastViolations).toEqual([]);
   });
 
   test('should have proper heading structure', async ({ page }) => {
-    await checkA11y(page, null, {
-      rules: {
-        'heading-order': { enabled: true },
-      },
-    });
+    const accessibilityScanResults = await new AxeBuilder({ page })
+      .withRules(['heading-order'])
+      .analyze();
+
+    expect(accessibilityScanResults.violations).toEqual([]);
   });
 
   test('all interactive elements should be keyboard accessible', async ({ page }) => {

@@ -6,10 +6,10 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "test:visual": "playwright test",
-    "test:a11y": "jest tests/accessibility.test.js",
+    "test:playwright": "playwright test",
+    "test:a11y": "playwright test tests/accessibility.spec.js",
     "test:html": "jest tests/html-validation.test.js",
-    "validate": "npm run test && npm run test:visual"
+    "validate": "npm test && npm run test:playwright"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.8.0",
