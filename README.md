@@ -14,6 +14,7 @@ Claude Agent Scheduler lets you create AI-powered automation agents and schedule
 - **Flexible Scheduling**: One-time, daily, weekly, or monthly schedules with timezone support
 - **Run Windows**: Set maximum durations to prevent agents from running too long
 - **Real-time Monitoring**: Watch agents execute in real-time with live log streaming
+- **Analytics Dashboard**: Comprehensive charts and statistics tracking agent performance, success rates, and execution trends
 - **Local-First**: All data stored locally in SQLite - your agents and schedules never leave your machine
 - **Template Agents**: Get started quickly with pre-built templates like "Night Shift Job Hunter"
 
@@ -157,6 +158,25 @@ From the Calendar view:
 2. Click **"Pause"** or **"Resume"**
 
 Or from the Agent detail view, you'll see all schedules with their status.
+
+### Viewing Analytics
+
+The Analytics view provides comprehensive insights into agent performance:
+
+1. Go to the **Analytics** view from the sidebar
+2. View key metrics:
+   - **Overview Cards**: Total runs, succeeded, failed, running, canceled, timed out
+   - **Status Distribution**: Pie chart showing breakdown of run statuses
+   - **Daily Trends**: Line chart of runs over the last 30 days
+   - **Agent Performance**: Bar chart comparing success/failure rates per agent
+   - **Detailed Stats Table**: Complete agent metrics with success rates and average durations
+
+Features:
+- Auto-refreshes every 30 seconds
+- Click **Refresh** to manually update data
+- Success rates color-coded (green ≥80%, yellow ≥50%, red <50%)
+- Hover over charts for detailed tooltips
+- View average execution duration per agent
 
 ## Template: Night Shift Job Hunter
 
@@ -312,10 +332,12 @@ This app follows Apple's Human Interface Guidelines:
 
 ## Roadmap
 
+Completed features:
+- [x] Run history analytics and charts
+
 Future enhancements we're considering:
 
 - [ ] Agent templates marketplace
-- [ ] Run history analytics and charts
 - [ ] Email/Slack notifications for run completion
 - [ ] Agent chaining (trigger one agent after another)
 - [ ] Cloud sync option (while keeping local-first approach)
@@ -323,6 +345,7 @@ Future enhancements we're considering:
 - [ ] Multi-step agent workflows with branching logic
 - [ ] Import/export agents and schedules
 - [ ] Dark mode
+- [ ] Enhanced analytics (heatmaps, custom date ranges, export reports)
 
 ## Demo Script
 
